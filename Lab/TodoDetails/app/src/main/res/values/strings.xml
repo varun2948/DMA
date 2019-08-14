@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Todo Details</string>
+    <string name="app_name">Todo App</string>
+    <string name="text_helloworld">Hello World!</string>
+    <string name="Previous_text">Prev</string>
+
+    <string-array name="todos">
+        <item>Wake Up</item>
+        <item>Drink Coffee</item>
+        <item>Make at Least One Person Laugh</item>
+        <item>Plant a Tree</item>
+        <item>Pounder on duality of existence</item>
+        <item>Go to Sleep</item>
+    </string-array>
 </resources>
