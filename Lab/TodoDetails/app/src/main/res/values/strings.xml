@@ -2,6 +2,7 @@
     <string name="app_name">Todo App</string>
     <string name="text_helloworld">Hello World!</string>
     <string name="Previous_text">Prev</string>
+    <string name="complete_checkbox">Task Complete?</string>
 
     <string-array name="todos">
         <item>Wake Up</item>
@@ -10,5 +11,15 @@
         <item>Plant a Tree</item>
         <item>Pounder on duality of existence</item>
         <item>Go to Sleep</item>
+
+    </string-array>
+
+    <string-array name="todosdescription">
+        <item>Wake Up Description</item>
+        <item>Drink Coffee Description</item>
+        <item>Make at Least One Person Laugh Description</item>
+        <item>Plant a Tree Description</item>
+        <item>Pounder on duality of existence Description</item>
+        <item>Go to Sleep Descriptions</item>
     </string-array>
 </resources>
