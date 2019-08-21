@@ -19,22 +19,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Display display = getWindowManager().getDefaultDisplay();
         textView= findViewById(R.id.orientationView);
-        int width = display.getWidth();
-        int height = display.getHeight();
-        if(width<height){
-            Toast.makeText(getApplicationContext(),"Device is in portrait mode",Toast.LENGTH_LONG ).show();
-            textView.setText("Device is in Potrait Mode");
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Device is in landscape  mode",Toast.LENGTH_LONG ).show();
-            textView.setText("Device is in Landscape Mode");
-        }
+//        int width = display.getWidth();
+//        int height = display.getHeight();
+//        if(width<height){
+//            Toast.makeText(getApplicationContext(),"Device is in portrait mode",Toast.LENGTH_LONG ).show();
+//            textView.setText("Device is in Potrait Mode");
+//        }
+//        else{
+//            Toast.makeText(getApplicationContext(),"Device is in landscape  mode",Toast.LENGTH_LONG ).show();
+//            textView.setText("Device is in Landscape Mode");
+//        }
+//        detailButton = findViewById(R.id.todo_btn);
+//        detailButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent((MainActivity.this),TodoList.class);
+////                intent.putExtra(TODO_INDEX,currentIndex);
+//                startActivity(intent);
+//            }
+//        });
         detailButton = findViewById(R.id.todo_btn);
         detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent((MainActivity.this),MainActivity.class);
-//                intent.putExtra(TODO_INDEX,currentIndex);
+                Intent intent = new Intent((MainActivity.this),TodoList.class);
+                intent.putExtra("key","value samir");
                 startActivity(intent);
             }
         });

@@ -2,5 +2,6 @@
     <string name="app_name">Week1</string>
     <string name="nxtBtn">Next Btn</string>
     <string name="prevBtn">Previous Btn</string>
+    <string name="title_activity_todo_list">TodoList</string>
 
 </resources>

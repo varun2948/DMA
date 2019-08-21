@@ -10,7 +10,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.tododetails.MainActivity.TODO_INDEX;
+
 public class TodoDetailActivity extends AppCompatActivity {
+
     private TextView textoutput;
     private String[] Todos;
     public static String IS_TODO_COMPLETE = "com.example.is_todo_complete";
@@ -21,7 +24,7 @@ public class TodoDetailActivity extends AppCompatActivity {
         Intent intent= getIntent();
         Resources res = getResources();
         Todos = res.getStringArray(R.array.todosdescription);
-        int todo_index= intent.getIntExtra(MainActivity.TODO_INDEX,0);
+        int todo_index= intent.getIntExtra(TODO_INDEX,0);
 
         textoutput=findViewById(R.id.textOutput);
         textoutput.setText(Todos[todo_index]);
@@ -55,9 +58,10 @@ public class TodoDetailActivity extends AppCompatActivity {
                     "There is always tomorrow!", Toast.LENGTH_LONG).show();
         }
 
-        Intent intent = new Intent();
+        Intent intent = new Intent(TodoDetailActivity.this, MainActivity.class);
         intent.putExtra(IS_TODO_COMPLETE, isChecked);
-        setResult(RESULT_OK, intent);
+        startActivity(intent);
+//        setResult(RESULT_OK, intent);
     }
 
 //    private void setIsComplete(boolean isChecked  ) {

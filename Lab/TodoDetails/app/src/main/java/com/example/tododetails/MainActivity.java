@@ -2,16 +2,22 @@ package com.example.tododetails;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import static com.example.tododetails.TodoDetailActivity.IS_TODO_COMPLETE;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private static final int IS_SUCCESS = -1;
     private String[] tasks = {"Play Football", "Study", "Dinner", "Sleep"};
     private TextView textView;
     private int totalLength;
@@ -46,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MainActivity", "onCreate()");
         totalLength = tasks.length;
 
+
+        getNewIntent(getIntent());
+
+    }
+
+    private void getNewIntent(Intent intent) {
+        if(intent != null){
+            boolean isChecked = intent.getBooleanExtra(IS_TODO_COMPLETE, false);
+            updateTodoComplete(isChecked);
+        }
     }
 
     @Override
@@ -112,6 +128,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.d("MainActivity", "onPause()");
+    }
+
+    protected void onActivityResult (int requestCode, int resultCode, Intent intent){
+        if(resultCode == IS_SUCCESS){
+            if(intent != null) {
+                boolean isTodoComplete = intent.getBooleanExtra(IS_TODO_COMPLETE, false);
+                updateTodoComplete(isTodoComplete);
+            }
+            else{
+                Toast.makeText( this, "Back Button Pressed", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Toast.makeText(this, "Code Mismatch",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void updateTodoComplete(boolean is_todo_complete) {
+
+        final TextView textViewTodo;
+        textViewTodo = findViewById(R.id.textOutput);
+        if(is_todo_complete){
+            textViewTodo.setBackgroundColor(ContextCompat.getColor(this,R.color.colorAccent));
+            textViewTodo.setTextColor(ContextCompat.getColor(this,android.R.color.white));
+
+        }
     }
 
 }
