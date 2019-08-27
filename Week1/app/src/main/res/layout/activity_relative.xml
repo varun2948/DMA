@@ -6,7 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".main_activity.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
     <RelativeLayout
@@ -28,10 +32,13 @@ android:layout_centerHorizontal="true"
             />
 
         <TextView
+            android:layout_below="@id/orientationView"
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello World!"
+            android:layout_marginTop="150dp"
+
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"/>
 
@@ -50,8 +57,36 @@ android:layout_centerHorizontal="true"
             android:layout_centerHorizontal="true"
 
             />
+
+        <Button
+            android:layout_below="@+id/todo_btn"
+            android:id="@+id/todo_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Todo List"
+            android:layout_marginTop="150dp"
+            android:layout_centerHorizontal="true"
+
+            />
+
+        <Button
+            android:layout_below="@+id/todo_btn1"
+            android:id="@+id/todo_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Todo List"
+            android:layout_marginTop="150dp"
+            android:layout_centerHorizontal="true"
+
+            />
+
     </RelativeLayout>
 
+    </ScrollView>
 
 
     <Button

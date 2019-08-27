@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".countrydetails.CountryDetails">
+
+    <TextView
+        android:id="@+id/country_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/country_header_txt"
+        style="@style/header_style"
+        />
+
+        <ScrollView
+            android:layout_below="@id/country_header"
+            android:layout_marginTop="@dimen/default_activity_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/default_activity_margin">
+
+
+    <TextView
+        android:id="@+id/country_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/detail_style"
+        android:text="@string/detail_txt"
+        android:layout_marginBottom="@dimen/default_activity_margin"
+        android:autoLink="web">
+
+    </TextView>
+
+    </LinearLayout>
+        </ScrollView>
+
+</RelativeLayout>
