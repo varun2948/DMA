@@ -38,8 +38,7 @@
         <item name="android:fontFamily">@font/opensansregular</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorBlack45</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@android:</item>
 
 
     </style>
