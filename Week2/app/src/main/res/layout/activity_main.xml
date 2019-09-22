@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical" >
+
+
+
+
+    <EditText
+        android:id="@+id/etNo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Enter Text Message"
+        android:textColor="@android:color/holo_blue_light"
+        android:inputType="textLongMessage" />
+
+
+    <Button
+        android:id="@+id/btnMessage"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_height="55dp"
+        android:text="Send Message" />
+    <Button
+        android:id="@+id/btnCamera"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_height="55dp"
+        android:text="Camera" />
+    <EditText
+        android:id="@+id/btnTextBrowser"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Enter Url "
+        android:textColor="@android:color/holo_blue_light"
+        android:inputType="textLongMessage" />
+    <Button
+        android:id="@+id/btnBrowser"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_height="55dp"
+        android:text="Browser" />
+    <Button
+        android:id="@+id/btnMap"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_height="55dp"
+        android:text="Map" />
+</LinearLayout>
+
