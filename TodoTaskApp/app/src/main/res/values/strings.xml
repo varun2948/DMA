@@ -2,6 +2,8 @@
     <string name="app_name">TodoTaskApp</string>
     <string name="tasks_name">Tasks</string>
     <string name="lists_name">Lists</string>
+    <string name="my_tasks">My Tasks</string>
     <string name="add_tasks">Add Tasks</string>
     <string name="add_task">Add Task</string>
+    <string name="tasks_number">2 of 7 Tasks</string>
 </resources>
