@@ -12,7 +12,7 @@ public class TasksLists extends AppCompatActivity {
     private final LinkedList<String> mWordList = new LinkedList<>();
 
     private RecyclerView mRecyclerView;
-    private WordListAdapter mAdapter;
+//    private WordListAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
