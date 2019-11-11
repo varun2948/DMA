@@ -1,75 +1,83 @@
-package com.example.todotaskapp;
+package com.example.todotaskapp.todolist;
 
 import android.app.AlertDialog;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
-import com.example.todotaskapp.todolist.AddTaskFormBottomSheet;
-import com.example.todotaskapp.todolist.Task;
-import com.example.todotaskapp.todolist.TasksLists;
-import com.example.todotaskapp.todolist.TodoViewModel;
+import com.example.todotaskapp.R;
+import com.example.todotaskapp.SingleTaskAdapter;
+import com.example.todotaskapp.ViewModelFactory;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AddTaskFormBottomSheet.OnAddTask, CustomAdapter.OnProjectClickListener {
+public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.OnTaskClickListener {
+
     private TodoViewModel viewModel;
+
+
+    private final LinkedList<Task> mWordList = new LinkedList<>();
+
+    private RecyclerView mRecyclerView;
+
+    private SingleTaskAdapter mAdapter;
+    private String projectName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tasks_lists);
 
-
-        final ArrayList<String> items = new ArrayList<>();
-        final CustomAdapter adapter = new CustomAdapter(this, items);
-        adapter.setOnClickListener(this);
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        SnapHelper startSnapHelper = new PagerSnapHelper();
-        startSnapHelper.attachToRecyclerView(recyclerView);
-
-        recyclerView.setAdapter(adapter);
 
         ViewModelFactory factory = ViewModelFactory.getInstance();
         viewModel = ViewModelProviders.of(this, factory).get(TodoViewModel.class);
 
-        viewModel.getAllProjects().observe(this, new Observer<List<String>>() {
-            @Override
-            public void onChanged(@Nullable List<String> projects) {
-                if (projects != null) {
-                    items.clear();
-                    items.addAll(projects);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        });
 
+        projectName = getIntent().getStringExtra("extra_project_name");
+
+        mRecyclerView = findViewById(R.id.single_task_recyclerview);
+        // Create an adapter and supply the data to be displayed.
+        mAdapter = new SingleTaskAdapter(this, mWordList);
+        mAdapter.setOnClickListener(this);
+        // Connect the adapter with the RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+        // Give the RecyclerView a default layout manager.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        viewModel.getTaskByProjectName(projectName)
+                .observe(this, new Observer<List<Task>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Task> tasks) {
+                        if (tasks != null) {
+                            mAdapter.updateList(tasks);
+                        }
+                    }
+                });
 
         findViewById(R.id.Add_btn)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        showAddTaskDialog(viewModel.getAllProjectsOnce(), null);
-
+                        showAddTaskDialog(viewModel.getAllProjectsOnce(), projectName);
                     }
                 });
     }
+
 
     private void showAddTaskDialog(List<String> projects, String projectName) {
         final View view = LayoutInflater.from(this)
@@ -113,18 +121,9 @@ public class MainActivity extends AppCompatActivity implements AddTaskFormBottom
         dialog.show();
     }
 
-
     @Override
-    public void onAddTask(String title, String projectName) {
-        viewModel.saveTask(title, String.valueOf(System.currentTimeMillis()), projectName);
+    public void OnTaskCheckToggled(Task task) {
+        viewModel.update(task);
     }
 
-
-    @Override
-    public void onProjectTap(String projectName) {
-        Intent intent = new Intent(this, TasksLists.class);
-        intent.putExtra("extra_project_name", projectName);
-        startActivity(intent);
-
-    }
 }

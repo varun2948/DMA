@@ -1,49 +1,95 @@
 package com.example.todotaskapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
     private Context context;
-    private ArrayList<HackSmileModelClass> items;
-    public CustomAdapter(Context context, ArrayList<HackSmileModelClass> items) {
+    private ArrayList<String> items;
+    private OnProjectClickListener listener;
+
+    public void setOnClickListener(OnProjectClickListener listener) {
+        this.listener = listener;
+    }
+
+    public CustomAdapter(Context context, ArrayList<String> items) {
         this.context = context;
         this.items = items;
     }
+
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.items, parent, false));
     }
+
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        holder.itemTitle.setText(items.get(position).getTitle());
-        holder.itemTitle.setText(items.get(position).getTitle());
-//        holder.itemImage.setImageResource(items.get(position).getImage());
+        final String projectName = items.get(position);
+        holder.itemTitle.setText(projectName);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onProjectTap(projectName);
+            }
+        });
+        holder.rootLayout.setBackgroundColor(Color
+                .parseColor(getColorByPos(position)));
     }
+
+
+    private String getColorByPos(int pos) {
+        if (pos < colors.length) {
+            return colors[pos];
+        } else {
+            int newPos = pos - colors.length;
+            return getColorByPos(newPos);
+        }
+    }
+
+    public static int getRandomColor(String[] array) {
+        int rnd = new Random().nextInt(array.length);
+        return Color.parseColor(array[rnd]);
+
+    }
+
+
+    private String[] colors = new String[]{
+            "#b71c1c", "#aa00ff", "#651fff", "#3d5afe", "#2979ff",
+            "#00b0ff", "#00b8d4", "#004d40", "#2e7d32", "#ffd600",
+            "#ffab00", "#3e2723"
+
+    };
+
+
     @Override
     public int getItemCount() {
         return items.size();
     }
+
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-//        private ImageView itemImage;
         private TextView itemTitle;
-        private TextView itemTitle1;
+        private RelativeLayout rootLayout;
+
         public CustomViewHolder(View view) {
             super(view);
-//            itemImage = view.findViewById(R.id.item_image);
-            itemTitle = view.findViewById(R.id.item_title);
-            itemTitle1 = view.findViewById(R.id.item_title1);
+            itemTitle = view.findViewById(R.id.tv_project_name);
+            rootLayout = view.findViewById(R.id.root_layout);
         }
+    }
+
+    public interface OnProjectClickListener {
+        void onProjectTap(String projectName);
     }
 }

@@ -10,90 +10,63 @@
         android:id="@+id/logo_id"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_slack_1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="50dp"
-    />
+        android:src="@drawable/ic_slack_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tasks_text"
+        style="@style/Tasks_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tasks_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/start_line"
-        app:layout_constraintEnd_toStartOf="@id/lists_text"
         android:layout_marginTop="130dp"
-        style="@style/Tasks_Text"
+        android:text="@string/tasks_name"
         android:textColor="@android:color/black"
-        />
+        app:layout_constraintEnd_toStartOf="@id/lists_text"
+        app:layout_constraintStart_toEndOf="@id/start_line"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/lists_text"
+        style="@style/Lists_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lists_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tasks_text"
-        app:layout_constraintEnd_toStartOf="@+id/end_line"
-        android:layout_marginTop="130dp"
         android:layout_marginStart="10dp"
-        style="@style/Lists_Text"
+        android:layout_marginTop="130dp"
+        android:text="@string/lists_name"
+        app:layout_constraintEnd_toStartOf="@+id/end_line"
+        app:layout_constraintStart_toEndOf="@id/tasks_text"
+        app:layout_constraintTop_toTopOf="parent"
 
         />
+
     <ImageView
         android:id="@+id/start_line"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tasks_text"
-        app:layout_constraintTop_toBottomOf="@id/logo_id"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="16dp"
         android:background="@color/colorBlack45"
-        />
+        app:layout_constraintEnd_toStartOf="@id/tasks_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo_id" />
 
     <ImageView
         android:id="@+id/end_line"
         android:layout_width="0dp"
         android:layout_height="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="70dp"
+        android:background="@color/colorBlack45"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/lists_text"
-        app:layout_constraintTop_toBottomOf="@id/logo_id"
-        android:layout_marginTop="70dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/colorBlack45"
-        />
+        app:layout_constraintTop_toBottomOf="@id/logo_id" />
 
 
-    <android.support.v7.widget.CardView
+    <include
         android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/btn_edge"
-        android:elevation="2dp"
-        app:contentPadding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tasks_text"
-        app:layout_constraintVertical_bias="0.13"
-
-        app:layout_constraintWidth_percent="0.18">
-
-        <ImageButton
-            android:id="@+id/Add_btn"
-            style="@style/Add_btn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_add_black_24dp"
-            android:text="@string/add_tasks"
-            android:onClick="sendMessage"/>
-    </android.support.v7.widget.CardView>
+        layout="@layout/button_layout" />
 
     <TextView
         android:id="@+id/textView"
@@ -110,22 +83,14 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_bias="0.037" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="327dp"
-        android:layout_height="370dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="32dp"
-        app:cardCornerRadius="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
