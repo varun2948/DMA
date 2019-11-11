@@ -40,4 +40,8 @@ public class TaskLocalSource {
     public List<String> getAllProjectsOnce() {
         return dao.getAllProjectsOnce();
     }
+
+    public void deleteByProjectName(String projectName) {
+        dao.deleteByProjectName(projectName);
+    }
 }

@@ -29,4 +29,7 @@ public abstract class TaskDAO {
 
     @Query("SELECT DISTINCT(projectName) FROM task")
     public abstract List<String> getAllProjectsOnce();
+
+    @Query("DELETE from task WHERE projectName=:projectName")
+    public abstract void deleteByProjectName(String projectName);
 }

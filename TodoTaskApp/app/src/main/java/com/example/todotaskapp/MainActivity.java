@@ -53,9 +53,7 @@ public class MainActivity extends AppCompatActivity implements AddTaskFormBottom
             @Override
             public void onChanged(@Nullable List<String> projects) {
                 if (projects != null) {
-                    items.clear();
-                    items.addAll(projects);
-                    adapter.notifyDataSetChanged();
+                    adapter.updateList(projects);
                 }
             }
         });
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements AddTaskFormBottom
                     @Override
                     public void onClick(View view) {
                         showAddTaskDialog(viewModel.getAllProjectsOnce(), null);
-
                     }
                 });
     }
@@ -114,6 +111,28 @@ public class MainActivity extends AppCompatActivity implements AddTaskFormBottom
     }
 
 
+    private void showDeleteConfirmationDialog(final String projectName) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this).
+                setTitle("Delete " + projectName)
+                .setMessage(String.format("Delete %s along with all its tasks", projectName))
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        viewModel.deleteByProjectName(projectName);
+                    }
+                })
+                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+        dialog.show();
+    }
+
+
     @Override
     public void onAddTask(String title, String projectName) {
         viewModel.saveTask(title, String.valueOf(System.currentTimeMillis()), projectName);
@@ -126,5 +145,10 @@ public class MainActivity extends AppCompatActivity implements AddTaskFormBottom
         intent.putExtra("extra_project_name", projectName);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onProjectLongTap(String projectName) {
+        showDeleteConfirmationDialog(projectName);
     }
 }

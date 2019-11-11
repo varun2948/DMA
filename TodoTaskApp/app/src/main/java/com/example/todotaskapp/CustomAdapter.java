@@ -3,6 +3,7 @@ package com.example.todotaskapp;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.todotaskapp.todolist.ProjectDiffCallback;
+import com.example.todotaskapp.todolist.Task;
+import com.example.todotaskapp.todolist.TodoDiffCallback;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -34,6 +40,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.items, parent, false));
     }
 
+    public void updateList(List<String> newList) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ProjectDiffCallback(newList, items));
+        items.clear();
+        items.addAll(newList);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         final String projectName = items.get(position);
@@ -42,6 +55,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             @Override
             public void onClick(View view) {
                 listener.onProjectTap(projectName);
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                listener.onProjectLongTap(projectName);
+                return true;
             }
         });
         holder.rootLayout.setBackgroundColor(Color
@@ -91,5 +111,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     public interface OnProjectClickListener {
         void onProjectTap(String projectName);
+
+        void onProjectLongTap(String projectName);
     }
 }

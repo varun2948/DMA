@@ -65,4 +65,13 @@ public class TodoViewModel extends AndroidViewModel {
     public List<String> getAllProjectsOnce() {
         return localSource.getAllProjectsOnce();
     }
+
+    public void deleteByProjectName(final String projectName) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                localSource.deleteByProjectName(projectName);
+            }
+        });
+    }
 }

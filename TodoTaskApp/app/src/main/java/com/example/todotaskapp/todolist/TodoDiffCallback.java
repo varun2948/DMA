@@ -6,33 +6,33 @@ import java.util.List;
 
 public class TodoDiffCallback extends DiffUtil.Callback {
 
-    private final List<Task> oldGeneralForms;
-    private final List<Task> newGeneralForms;
+    private final List<Task> oldTodo;
+    private final List<Task> newTodo;
 
     public TodoDiffCallback(List<Task> newGeneralForms, List<Task> oldGeneralForms) {
-        this.newGeneralForms = newGeneralForms;
-        this.oldGeneralForms = oldGeneralForms;
+        this.newTodo = newGeneralForms;
+        this.oldTodo = oldGeneralForms;
     }
 
 
     @Override
     public int getOldListSize() {
-        return oldGeneralForms.size();
+        return oldTodo.size();
     }
 
     @Override
     public int getNewListSize() {
-        return newGeneralForms.size();
+        return newTodo.size();
     }
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldGeneralForms.get(oldItemPosition).getId()
-                .equals(newGeneralForms.get(newItemPosition).getId());
+        return oldTodo.get(oldItemPosition).getId()
+                .equals(newTodo.get(newItemPosition).getId());
     }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldGeneralForms.get(oldItemPosition).equals(newGeneralForms.get(newItemPosition));
+        return oldTodo.get(oldItemPosition).equals(newTodo.get(newItemPosition));
     }
 }
