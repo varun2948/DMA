@@ -1,4 +1,4 @@
-package com.example.todotaskapp;
+package com.example.todotaskapp.projectlist;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,19 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.todotaskapp.todolist.ProjectDiffCallback;
-import com.example.todotaskapp.todolist.Task;
-import com.example.todotaskapp.todolist.TodoDiffCallback;
+import com.example.todotaskapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
+public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.CustomViewHolder> {
     private Context context;
     private ArrayList<String> items;
     private OnProjectClickListener listener;
@@ -30,7 +27,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         this.listener = listener;
     }
 
-    public CustomAdapter(Context context, ArrayList<String> items) {
+    public ProjectListAdapter(Context context, ArrayList<String> items) {
         this.context = context;
         this.items = items;
     }

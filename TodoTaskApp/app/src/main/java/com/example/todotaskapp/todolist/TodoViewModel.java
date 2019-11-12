@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.example.todotaskapp.todolist.source.Task;
+import com.example.todotaskapp.todolist.source.TaskLocalSource;
+
 import java.util.List;
 
 public class TodoViewModel extends AndroidViewModel {

@@ -1,4 +1,4 @@
-package com.example.todotaskapp.todolist;
+package com.example.todotaskapp.todolist.source;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
@@ -12,7 +12,7 @@ public class TaskLocalSource {
     private TaskDAO dao;
 
 
-    TaskLocalSource(Context context) {
+    public TaskLocalSource(Context context) {
         dao = TodoDatabase.getDatabase(context).getTaskDao();
     }
 
@@ -25,7 +25,7 @@ public class TaskLocalSource {
     }
 
     public LiveData<List<Task>> getTaskByProjectName(String projectName) {
-        return dao.getTaskByDate(projectName, false);
+        return dao.getTaskByDate(projectName);
     }
 
 

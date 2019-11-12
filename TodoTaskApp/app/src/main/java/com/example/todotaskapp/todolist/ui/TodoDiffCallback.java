@@ -1,6 +1,8 @@
-package com.example.todotaskapp.todolist;
+package com.example.todotaskapp.todolist.ui;
 
 import android.support.v7.util.DiffUtil;
+
+import com.example.todotaskapp.todolist.source.Task;
 
 import java.util.List;
 

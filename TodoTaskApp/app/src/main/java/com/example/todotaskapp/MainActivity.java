@@ -24,16 +24,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.todotaskapp.common.ViewModelFactory;
 import com.example.todotaskapp.common.DateUtils;
-import com.example.todotaskapp.todolist.AddTaskFormBottomSheet;
-import com.example.todotaskapp.todolist.TasksLists;
+import com.example.todotaskapp.projectlist.ProjectListAdapter;
+import com.example.todotaskapp.todolist.ui.TasksListActivity;
 import com.example.todotaskapp.todolist.TodoViewModel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AddTaskFormBottomSheet.OnAddTask, CustomAdapter.OnProjectClickListener {
+public class MainActivity extends AppCompatActivity implements ProjectListAdapter.OnProjectClickListener {
     private TodoViewModel viewModel;
 
     @Override
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements AddTaskFormBottom
 
 
         final ArrayList<String> items = new ArrayList<>();
-        final CustomAdapter adapter = new CustomAdapter(this, items);
+        final ProjectListAdapter adapter = new ProjectListAdapter(this, items);
         adapter.setOnClickListener(this);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -169,16 +170,11 @@ public class MainActivity extends AppCompatActivity implements AddTaskFormBottom
     }
 
 
-    @Override
-    public void onAddTask(String title, String projectName) {
-        viewModel.saveTask(title, String.valueOf(System.currentTimeMillis()), projectName);
-    }
-
 
     @Override
     public void onProjectTap(String projectName, int color, View view) {
 
-        Intent intent = new Intent(this, TasksLists.class);
+        Intent intent = new Intent(this, TasksListActivity.class);
         intent.putExtra("extra_project_name", projectName);
         intent.putExtra("extra_project_color", color);
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "profile");

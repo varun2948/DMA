@@ -1,4 +1,4 @@
-package com.example.todotaskapp.todolist;
+package com.example.todotaskapp.todolist.ui;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -15,24 +15,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import com.example.todotaskapp.MainActivity;
 import com.example.todotaskapp.R;
-import com.example.todotaskapp.SingleTaskAdapter;
-import com.example.todotaskapp.ViewModelFactory;
+import com.example.todotaskapp.common.ViewModelFactory;
 import com.example.todotaskapp.common.DateUtils;
+import com.example.todotaskapp.todolist.TodoViewModel;
+import com.example.todotaskapp.todolist.source.Task;
 
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.OnTaskClickListener {
+public class TasksListActivity extends AppCompatActivity implements TodoListAdapter.OnTaskClickListener {
 
     private TodoViewModel viewModel;
 
@@ -41,9 +39,10 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
 
     private RecyclerView mRecyclerView;
 
-    private SingleTaskAdapter mAdapter;
+    private TodoListAdapter mAdapter;
     private String projectName;
     private int projectColor;
+    private CardView cardView;
 
 
     @Override
@@ -59,19 +58,11 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
         projectName = getIntent().getStringExtra("extra_project_name");
         projectColor = getIntent().getIntExtra("extra_project_color", 0);
 
+        bindUI();
+        setupRecyclerView();
 
-        CardView cardView = findViewById(R.id.card_view);
         cardView.setCardBackgroundColor(projectColor);
 
-        mRecyclerView = findViewById(R.id.single_task_recyclerview);
-        // Create an adapter and supply the data to be displayed.
-        mAdapter = new SingleTaskAdapter(this, mWordList);
-        mAdapter.setOnClickListener(this);
-        // Connect the adapter with the RecyclerView.
-        mRecyclerView.setAdapter(mAdapter);
-        // Give the RecyclerView a default layout manager.
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         viewModel.getTaskByProjectName(projectName)
                 .observe(this, new Observer<List<Task>>() {
@@ -92,6 +83,23 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
                 });
     }
 
+    private void setupRecyclerView() {
+        // Create an adapter and supply the data to be displayed.
+        mAdapter = new TodoListAdapter(this, mWordList);
+        mAdapter.setOnClickListener(this);
+        // Connect the adapter with the RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+        // Give the RecyclerView a default layout manager.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void bindUI() {
+        cardView = findViewById(R.id.card_view);
+        mRecyclerView = findViewById(R.id.single_task_recyclerview);
+
+    }
+
     private void showAddTaskDialog(List<String> projects, String projectName) {
         final View view = LayoutInflater.from(this)
                 .inflate(R.layout.add_task_layout, null);
@@ -99,6 +107,9 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
         final TextInputLayout taskName = view.findViewById(R.id.ti_add_task);
         final TextView tvDate = view.findViewById(R.id.tv_date);
 
+//        autoCompleteTextView.setFocusable(false);
+//        autoCompleteTextView.setClickable(false);
+        autoCompleteTextView.setEnabled(false);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, projects);
         autoCompleteTextView.setAdapter(adapter);
@@ -118,10 +129,8 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
                         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                TasksLists.this, R.style.anim_dialog, new DatePickerDialog.OnDateSetListener() {
+                                TasksListActivity.this, R.style.anim_dialog, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                                 String date = DateUtils.formatDate(year, monthOfYear, dayOfMonth);
@@ -145,6 +154,7 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
 
                         taskName.getEditText().getText().clear();
                         autoCompleteTextView.getText().clear();
+//                        autoCompleteTextView.setClickable(false);
                         viewModel.saveTask(title,
                                 date,
                                 projectName);

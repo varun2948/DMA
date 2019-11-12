@@ -1,4 +1,4 @@
-package com.example.todotaskapp.todolist;
+package com.example.todotaskapp.todolist.source;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

@@ -1,4 +1,4 @@
-package com.example.todotaskapp;
+package com.example.todotaskapp.common;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;

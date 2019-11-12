@@ -1,4 +1,4 @@
-package com.example.todotaskapp.todolist;
+package com.example.todotaskapp.projectlist;
 
 import android.support.v7.util.DiffUtil;
 

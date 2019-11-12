@@ -1,4 +1,4 @@
-package com.example.todotaskapp;
+package com.example.todotaskapp.todolist.ui;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -12,13 +12,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.example.todotaskapp.todolist.Task;
-import com.example.todotaskapp.todolist.TodoDiffCallback;
+import com.example.todotaskapp.R;
+import com.example.todotaskapp.todolist.source.Task;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class SingleTaskAdapter extends RecyclerView.Adapter<SingleTaskAdapter.WordViewHolder> {
+public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.WordViewHolder> {
     private final LinkedList<Task> mWordList;
     private LayoutInflater mInflater;
     private OnTaskClickListener listener;
@@ -27,9 +27,9 @@ public class SingleTaskAdapter extends RecyclerView.Adapter<SingleTaskAdapter.Wo
         public final TextView wordItemView;
         private final CheckBox checkBox;
         private final TextView tvDate;
-        final SingleTaskAdapter mAdapter;
+        final TodoListAdapter mAdapter;
 
-        public WordViewHolder(View itemView, SingleTaskAdapter adapter) {
+        public WordViewHolder(View itemView, TodoListAdapter adapter) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.word);
             checkBox = itemView.findViewById(R.id.checkbox);
@@ -38,7 +38,7 @@ public class SingleTaskAdapter extends RecyclerView.Adapter<SingleTaskAdapter.Wo
         }
     }
 
-    public SingleTaskAdapter(Context context, LinkedList<Task> wordList) {
+    public TodoListAdapter(Context context, LinkedList<Task> wordList) {
         mInflater = LayoutInflater.from(context);
         this.mWordList = wordList;
     }
@@ -56,14 +56,14 @@ public class SingleTaskAdapter extends RecyclerView.Adapter<SingleTaskAdapter.Wo
 
     @NonNull
     @Override
-    public SingleTaskAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TodoListAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View mItemView = mInflater.inflate(R.layout.wordlist_item,
                 parent, false);
         return new WordViewHolder(mItemView, this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SingleTaskAdapter.WordViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final TodoListAdapter.WordViewHolder holder, int position) {
         final Task mCurrent = mWordList.get(position);
         holder.wordItemView.setText(mCurrent.getTitle());
 //        if(mCurrent.isCompleted()){

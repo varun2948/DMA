@@ -5,8 +5,15 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <TextView
+        android:id="@+id/todo_tsk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Todo Task"
+        ></TextView>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ti_add_task"
+        android:layout_below="@id/ti_add_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Remind me to ...">
@@ -22,13 +29,20 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ti_add_task"
+        android:layout_below="@id/auto_hint"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/tv_date"
+        android:textSize="20sp"
         android:hint="Project name" />
 
 
-
+    <TextView
+        android:id="@+id/auto_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ti_add_task"
+        android:text="Project Name"
+        ></TextView>
     <TextView
         android:id="@+id/tv_date"
         style="@style/TextAppearance.AppCompat.Medium"
@@ -37,6 +51,7 @@
         android:layout_below="@id/ti_add_task"
         android:layout_alignParentEnd="true"
         android:padding="8dp"
+        android:textStyle="bold"
         android:text="Today" />
 
 </RelativeLayout>
