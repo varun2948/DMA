@@ -26,6 +26,15 @@ public class TodoViewModel extends AndroidViewModel {
         return !TextUtils.isEmpty(title) && !TextUtils.isEmpty(dateTime);
     }
 
+    public boolean isProjectValid(String project) {
+        return TextUtils.isEmpty(project);
+    }
+
+
+    public boolean isTaskValid(String task) {
+        return TextUtils.isEmpty(task);
+    }
+
     public Task mapInputToTask(String title, String dateTime, String projectName) {
         return new Task(title, dateTime, false, projectName);
     }

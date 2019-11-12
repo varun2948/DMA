@@ -1,6 +1,7 @@
 package com.example.todotaskapp;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -25,12 +26,14 @@ public class SingleTaskAdapter extends RecyclerView.Adapter<SingleTaskAdapter.Wo
     class WordViewHolder extends RecyclerView.ViewHolder {
         public final TextView wordItemView;
         private final CheckBox checkBox;
+        private final TextView tvDate;
         final SingleTaskAdapter mAdapter;
 
         public WordViewHolder(View itemView, SingleTaskAdapter adapter) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.word);
             checkBox = itemView.findViewById(R.id.checkbox);
+            tvDate = itemView.findViewById(R.id.tv_date);
             this.mAdapter = adapter;
         }
     }
@@ -60,16 +63,37 @@ public class SingleTaskAdapter extends RecyclerView.Adapter<SingleTaskAdapter.Wo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SingleTaskAdapter.WordViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final SingleTaskAdapter.WordViewHolder holder, int position) {
         final Task mCurrent = mWordList.get(position);
         holder.wordItemView.setText(mCurrent.getTitle());
+//        if(mCurrent.isCompleted()){
+//            holder.wordItemView.setPaintFlags(holder.wordItemView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//        }
+        if(mCurrent.isCompleted() ){
+
+            holder.checkBox.setEnabled(false);
+            holder.wordItemView.setPaintFlags(holder.wordItemView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            holder.wordItemView.setPaintFlags(holder.wordItemView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            holder.checkBox.setEnabled(true);
+        }
         holder.checkBox.setChecked(mCurrent.isCompleted());
+        holder.tvDate.setText(mCurrent.getDateTime());
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 mCurrent.setCompleted(!mCurrent.isCompleted());
+                if(mCurrent.isCompleted() ){
+
+                    holder.checkBox.setEnabled(false);
+                    holder.wordItemView.setPaintFlags(holder.wordItemView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }else{
+                    holder.wordItemView.setPaintFlags(holder.wordItemView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                    holder.checkBox.setEnabled(true);
+                }
                 listener.OnTaskCheckToggled(mCurrent);
+
             }
         });
     }

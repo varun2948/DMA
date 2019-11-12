@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,13 +49,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CustomViewHolder holder, int position) {
         final String projectName = items.get(position);
+        final int color = Color.parseColor(getColorByPos(position));
         holder.itemTitle.setText(projectName);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onProjectTap(projectName);
+                listener.onProjectTap(projectName, color, holder.itemView);
             }
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -64,8 +66,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 return true;
             }
         });
-        holder.rootLayout.setBackgroundColor(Color
-                .parseColor(getColorByPos(position)));
+        holder.rootLayout.setCardBackgroundColor(color);
     }
 
 
@@ -100,7 +101,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         private TextView itemTitle;
-        private RelativeLayout rootLayout;
+        private CardView rootLayout;
 
         public CustomViewHolder(View view) {
             super(view);
@@ -110,7 +111,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     public interface OnProjectClickListener {
-        void onProjectTap(String projectName);
+        void onProjectTap(String projectName, int color, View itemView);
 
         void onProjectLongTap(String projectName);
     }

@@ -18,7 +18,7 @@ public abstract class TaskDAO {
     @Delete
     public abstract void deleteTask(Task task);
 
-    @Query("SELECT * FROM task WHERE projectName =:projectName AND isCompleted=:isCompleted")
+    @Query("SELECT * FROM task WHERE projectName =:projectName OR isCompleted=:isCompleted ")
     public abstract LiveData<List<Task>> getTaskByDate(String projectName, boolean isCompleted);
 
     @Query("SELECT DISTINCT(projectName) FROM task")

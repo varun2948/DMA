@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -8,10 +9,27 @@
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:buttonTint="#fff"/>
 
     <TextView
         android:id="@+id/word"
-        style="@style/word_title"
-        android:layout_toEndOf="@id/checkbox" />
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:textColor="#fff"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/checkbox"
+        tools:text="Learn new moves" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:textColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/word"
+        android:layout_toEndOf="@id/checkbox"
+        tools:text="Learn new moves" />
+
+
 </RelativeLayout>

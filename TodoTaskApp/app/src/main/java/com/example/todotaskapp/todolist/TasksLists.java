@@ -1,7 +1,7 @@
 package com.example.todotaskapp.todolist;
 
 import android.app.AlertDialog;
-import android.arch.lifecycle.LiveData;
+import android.app.DatePickerDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
@@ -9,18 +9,26 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
+import com.example.todotaskapp.MainActivity;
 import com.example.todotaskapp.R;
 import com.example.todotaskapp.SingleTaskAdapter;
 import com.example.todotaskapp.ViewModelFactory;
+import com.example.todotaskapp.common.DateUtils;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +43,7 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
 
     private SingleTaskAdapter mAdapter;
     private String projectName;
+    private int projectColor;
 
 
     @Override
@@ -48,6 +57,11 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
 
 
         projectName = getIntent().getStringExtra("extra_project_name");
+        projectColor = getIntent().getIntExtra("extra_project_color", 0);
+
+
+        CardView cardView = findViewById(R.id.card_view);
+        cardView.setCardBackgroundColor(projectColor);
 
         mRecyclerView = findViewById(R.id.single_task_recyclerview);
         // Create an adapter and supply the data to be displayed.
@@ -78,12 +92,12 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
                 });
     }
 
-
     private void showAddTaskDialog(List<String> projects, String projectName) {
         final View view = LayoutInflater.from(this)
                 .inflate(R.layout.add_task_layout, null);
         final AutoCompleteTextView autoCompleteTextView = view.findViewById(R.id.auto_tv);
         final TextInputLayout taskName = view.findViewById(R.id.ti_add_task);
+        final TextView tvDate = view.findViewById(R.id.tv_date);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, projects);
@@ -93,30 +107,52 @@ public class TasksLists extends AppCompatActivity implements SingleTaskAdapter.O
         }
 
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this).
-                setTitle("Add task in " + projectName)
+        Calendar calendar = Calendar.getInstance();
+        final int startYear = calendar.get(Calendar.YEAR);
+        final int starthMonth = calendar.get(Calendar.MONTH);
+        final int startDay = calendar.get(Calendar.DAY_OF_MONTH);
+        String date = DateUtils.formatDate(startYear, starthMonth, startDay);
+        tvDate.setText(date);
+
+        view.findViewById(R.id.tv_date)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                                TasksLists.this, R.style.anim_dialog, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                                String date = DateUtils.formatDate(year, monthOfYear, dayOfMonth);
+                                tvDate.setText(date);
+                            }
+                        }, startYear, starthMonth, startDay);
+
+                        datePickerDialog.show();
+                    }
+                });
+
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.anim_dialog)
+                .setTitle("Add task")
                 .setView(view)
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String title = taskName.getEditText().getText().toString();
                         String projectName = autoCompleteTextView.getEditableText().toString();
+                        String date = tvDate.getText().toString();
 
                         taskName.getEditText().getText().clear();
                         autoCompleteTextView.getText().clear();
-
                         viewModel.saveTask(title,
-                                String.valueOf(System.currentTimeMillis()),
+                                date,
                                 projectName);
+
 
                     }
                 })
-                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
+                .setNegativeButton("Dismiss", null);
 
         dialog.show();
     }

@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="220dp"
-    android:layout_height="match_parent"
-    android:layout_margin="2dp"
+    app:cardUseCompatPadding="true"
+    android:transitionName="project_card"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_layout"
-    android:background="#3a2995">
+    android:layout_width="220dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp">
 
 
-    <TextView
-        android:id="@+id/tv_project_name"
-        style="@style/TextAppearance.AppCompat.Title.Inverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        tools:text="Project Name" />
+        <TextView
+            android:id="@+id/tv_project_name"
+            style="@style/TextAppearance.AppCompat.Title.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:text="Project Name" />
 
-</RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

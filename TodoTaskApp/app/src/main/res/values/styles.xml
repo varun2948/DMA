@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/change_image_transform</item>
+        <item name="android:windowExitTransition">@transition/change_image_transform</item>
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/change_image_transform
+        </item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/change_image_transform
+        </item>
     </style>
 
     <style name="Tasks_Text" parent="TextAppearance.AppCompat.Title">
@@ -16,6 +26,7 @@
         <item name="android:textSize">35sp</item>
 
     </style>
+
     <style name="Lists_Text" parent="TextAppearance.AppCompat.Title">
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/opensansregular</item>
@@ -49,5 +60,15 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="anim_dialog"  parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_slide_up</item>
+        <item name="android:windowExitAnimation">@anim/dialog_slide_bottom</item>
+    </style>
+
 
 </resources>
