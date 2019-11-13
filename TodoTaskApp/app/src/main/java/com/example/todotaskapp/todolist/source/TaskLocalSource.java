@@ -1,8 +1,10 @@
 package com.example.todotaskapp.todolist.source;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
+
 import android.content.Context;
 
+import com.example.todotaskapp.common.DateUtils;
 import com.example.todotaskapp.db.TodoDatabase;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class TaskLocalSource {
         dao.update(task);
     }
 
-    public LiveData<List<String>> getAllProjects(){
+    public LiveData<List<String>> getAllProjects() {
         return dao.getAllProjects();
     }
 
@@ -43,5 +45,9 @@ public class TaskLocalSource {
 
     public void deleteByProjectName(String projectName) {
         dao.deleteByProjectName(projectName);
+    }
+
+    public List<Task> getOverDueTasks() {
+        return dao.getOverDueTask(DateUtils.getToday(), false);
     }
 }

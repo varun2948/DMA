@@ -10,34 +10,44 @@ import android.widget.TextView;
 
 import com.example.todotaskapp.MainActivity;
 import com.example.todotaskapp.R;
+import com.example.todotaskapp.common.Constants;
+import com.example.todotaskapp.common.SharedPreferenceUtils;
+import com.example.todotaskapp.walkthrough.WalkThroughSliderActivity;
 
 public class SplashActivity extends Activity {
 
     Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashfile);
 
-        final Animation a = AnimationUtils.loadAnimation(this,  R.anim.shake);
+        final Animation a = AnimationUtils.loadAnimation(this, R.anim.shake);
         a.reset();
         final TextView rText = (TextView) findViewById(R.id.textSplash);
+        rText.startAnimation(a);
 
 
-                rText.startAnimation(a);
-
-
-
-        handler=new Handler();
+        handler = new Handler();
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(SharedPreferenceUtils.getInstance(SplashActivity.this).getBoolanValue(Constants.isFirstTime, false)){
+
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }else {
+                    Intent intent = new Intent(SplashActivity.this, WalkThroughSliderActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
-        },3000);
+        }, 3000);
 
     }
 }

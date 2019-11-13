@@ -17,6 +17,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:textColor="#fff"
+        android:textSize="15sp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/checkbox"
         tools:text="Learn new moves" />
@@ -25,6 +26,7 @@
         android:id="@+id/tv_date"
         style="@style/TextAppearance.AppCompat.Caption"
         android:textColor="#fff"
+        android:textSize="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/word"
