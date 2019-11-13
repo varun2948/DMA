@@ -8,9 +8,11 @@ TodoTask App is an Android Native app which is based on the JAVA Language which 
 
 # Features
 1. CRUD operation of Task/Project.
-2. Animation with the help of Animator
+2. Animation
 3. Transition 
 4. Splash Screen
+5. Walkthrough Screen
+6. Schedule Notification at Morning (7:00 to 8:00 Am)
 
 # Framework
 Model View View Model (MVVM)
