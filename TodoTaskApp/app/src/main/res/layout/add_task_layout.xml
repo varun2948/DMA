@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_add_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ti_add_task"
+        android:hint="Remind me to ..."
+        app:helperText="Todo Task">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/auto_tv"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ti_add_task"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/tv_date"
+        android:hint="Work.."
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:layout_marginStart="5dp"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:id="@+id/auto_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/auto_tv"
+        android:text="Project Name" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ti_add_task"
+        android:layout_alignParentEnd="true"
+        android:padding="8dp"
+        android:text="Today"
+        android:textStyle="bold" />
+
+</RelativeLayout>

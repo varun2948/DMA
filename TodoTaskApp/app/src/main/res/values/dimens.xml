@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_default_margin">16dp</dimen>
+    <dimen name="activity_default_padding">10dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_xsmall">4dp</dimen>
+    <dimen name="banner_height">300dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+
+    <dimen name="spacing_xxxsmall">1dp</dimen>
+    <dimen name="spacing_xxsmall">2dp</dimen>
+    <dimen name="spacing_xsmall">4dp</dimen>
+    <dimen name="spacing_small">6dp</dimen>
+    <dimen name="spacing_medium">8dp</dimen>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_mlarge">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">36dp</dimen>
+    <dimen name="spacing_xxxlarge">40dp</dimen>
+    <dimen name="spacing_appbar_size">56dp</dimen>
+    <dimen name="spacing_home_button_margin">56dp</dimen>
+
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_72">72dp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+
+    <dimen name="text_table_title">16sp</dimen>
+
+    <dimen name="text_table_body">14sp</dimen>
+    <dimen name="text_material_header">20sp</dimen>
+    <dimen name="text_material_header1">24sp</dimen>
+    <dimen name="grid_reveal_height">100dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+
+    <dimen name="material_text_button">14sp</dimen>
+    <dimen name="material_text_menu">14sp</dimen>
+    <dimen name="material_text_caption">12sp</dimen>
+    <dimen name="material_text_small_caption">10sp</dimen>
+    <dimen name="material_text_body1">14sp</dimen>
+    <dimen name="material_text_body2">13sp</dimen>
+    <dimen name="material_text_subhead">16sp</dimen>
+    <dimen name="material_text_title">20sp</dimen>
+    <dimen name="material_text_title2">18sp</dimen>
+    <dimen name="material_text_headline">24sp</dimen>
+    <dimen name="material_text_headline1">22sp</dimen>
+    <dimen name="material_text_display1">30sp</dimen>
+    <dimen name="material_text_display2">34sp</dimen>
+    <dimen name="material_text_display3">45sp</dimen>
+    <dimen name="material_text_display4">56sp</dimen>
+    <dimen name="material_text_display5">112sp</dimen>
+
+    <!--intro slider dimens start-->
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
+    <dimen name="img_width_height">120dp</dimen>
+    <dimen name="slide_title">30dp</dimen>
+    <dimen name="slide_desc">16dp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
+    <dimen name="details_page_img_height">250dp</dimen>
+    <!--intro slider dimens end-->
+
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="dp_76">76dp</dimen>
+    <dimen name="walkthrough_image_height">400dp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+
+</resources>

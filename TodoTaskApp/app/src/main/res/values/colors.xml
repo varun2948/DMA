@@ -1,7 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+    <color name="colorPrimaryLight">#07AA8A</color>
+    <!--<color name="colorAccent">#D81B60</color>-->
+
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_37">#5EFFFFFF</color>
+    <color name="colorPrimaryLight87">#8F07AA8A</color>
+
+    <color name="white_56">#8FFFFFFF</color>
+    <color name="light_green">#F7FCFB</color>
+    <color name="green_boarder">#05B491</color>
+
+    <color name="black">#000</color>
+    <color name="black_37">#5E000000</color>
+    <!--<color name="textColorPrimary">#E6000000</color>-->
+
+    <color name="transparentBackgroundColor">#5E000000</color>
+    <color name="homeBackgroundColor">#F76A817F</color>
+    <!--<color name="textColorSecondary">#393939</color>-->
+    <color name="textColorSecondary">#4B4A4C</color>
+    <color name="slate_black">#4B4A4C</color>
+    <color name="divider_grey">#D4D4D4</color>
+
+    <color name="listItemFirstBG">#E3F2FD</color>
+    <color name="sectionrecyclerHeadBG">#F3BBDEFB</color>
+    <color name="sectionrecyclerHeadBG_37">#5EBBDEFB</color>
+    <color name="transparent">#00000000</color>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBlack45">#5E2B2626</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+    <color name="bg_screen5">#F3BC68</color>
+
+    <!--&lt;!&ndash; dots inactive colors &ndash;&gt;-->
+    <!--<color name="dot_dark_screen1">#d1395c</color>-->
+    <!--<color name="dot_dark_screen2">#14a895</color>-->
+    <!--<color name="dot_dark_screen3">#2278d4</color>-->
+    <!--<color name="dot_dark_screen4">#a854d4</color>-->
+    <!--<color name="dot_dark_screen5">#F8A731</color>-->
+
+    <!--&lt;!&ndash; dots active colors &ndash;&gt;-->
+    <!--<color name="dot_light_screen1">#f98da5</color>-->
+    <!--<color name="dot_light_screen2">#8cf9eb</color>-->
+    <!--<color name="dot_light_screen3">#93c6fd</color>-->
+    <!--<color name="dot_light_screen4">#e4b5fc</color>-->
+    <!--<color name="dot_light_screen5">#FACA83</color>-->
+    <!--<color name="home_grid_card_bg_volor">#E3F2FD</color>-->
+
+    <color name="textColorPrimary">#2E2E2E</color>
+    <color name="white_95">#F2FFFFFF</color>
+    <color name="white">#fff</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">@color/sectionrecyclerHeadBG</color>
+    <color name="dot_dark_screen2">@color/sectionrecyclerHeadBG</color>
+    <color name="dot_dark_screen3">@color/sectionrecyclerHeadBG</color>
+    <color name="dot_dark_screen4">@color/sectionrecyclerHeadBG</color>
+    <color name="dot_dark_screen5">@color/sectionrecyclerHeadBG</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">@color/colorPrimaryDark</color>
+    <color name="dot_light_screen2">@color/colorPrimaryDark</color>
+    <color name="dot_light_screen3">@color/colorPrimaryDark</color>
+    <color name="dot_light_screen4">@color/colorPrimaryDark</color>
+    <color name="dot_light_screen5">@color/colorPrimaryDark</color>
+    <color name="home_grid_card_bg_volor">#E3F2FD</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+        <item>@color/dot_light_screen5</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+        <item>@color/dot_dark_screen5</item>
+    </array>
+
+    <!-- end of intro color slider-->
 </resources>

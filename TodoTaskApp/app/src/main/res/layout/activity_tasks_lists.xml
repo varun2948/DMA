@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
-        android:text="@string/tasks_name"
+        android:text="@string/my_tasks"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toStartOf="@id/lists_text"
         app:layout_constraintStart_toEndOf="@id/start_line"
@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="130dp"
-        android:text="@string/lists_name"
         app:layout_constraintEnd_toStartOf="@+id/end_line"
         app:layout_constraintStart_toEndOf="@id/tasks_text"
         app:layout_constraintTop_toTopOf="parent"
@@ -63,34 +62,59 @@
         app:layout_constraintStart_toEndOf="@id/lists_text"
         app:layout_constraintTop_toBottomOf="@id/logo_id" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:text="@string/tasks_number"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tasks_text"
+        app:layout_constraintVertical_bias="0.026" />
 
     <include
-        android:id="@+id/cardView"
+        android:id="@+id/btnAddSingleTask"
         layout="@layout/button_layout" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="271dp"
+        android:layout_height="355dp"
+        android:layout_gravity="center"
+        android:layout_margin="60dp"
+        android:transitionName="project_card"
+        app:cardCornerRadius="4dp"
+        app:contentPadding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddSingleTask">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/single_task_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/add_task"
+        android:text="@string/add_tasks_otherpage"
+        app:layout_constraintBottom_toTopOf="@+id/card_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.037" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btnAddSingleTask"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,63 @@
     <string name="app_name">TodoTaskApp</string>
     <string name="tasks_name">Tasks</string>
     <string name="lists_name">Lists</string>
+    <string name="my_tasks">My Tasks</string>
     <string name="add_tasks">Add Tasks</string>
-    <string name="add_task">Add Task</string>
+    <string name="add_task">Add Task With Project</string>
+    <string name="tasks_number">2 of 7 Tasks</string>
+
+
+    <string name="geofences_added">Geofences added</string>
+    <string name="geofences_removed">Geofences removed</string>
+
+    <!-- Error strings -->
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_transition_notification_text">
+        Click notification to return to app
+    </string>
+
+    <string name="insufficient_permissions">Insufficient permissions.</string>
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="settings">Settings</string>
+    <string name="add_tasks_otherpage">Add Tasks</string>
+
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="got_it">GOT IT</string>
+
+    <string name="slide_1_title">Reminder every Morning!</string>
+    <string name="remember_totolist">Rememebering Todo List Will Be Easy Now As Every Morning The Tasks Which are Scheduled for Today Will Be Reminded At 7:00 To 8:00 Am.</string>
+
+    <string name="slide_2_title">Add Todo Tasks!</string>
+    <string name="slide_2_desc">Task/Todo List Adding Is Much More Easier &amp; Faster and With Beautiful UI.</string>
+
+    <string name="slide_3_title">360/VR Images!</string>
+    <string name="slide_3_desc">Explore more with 360 degree images of all seasons and time.</string>
+
+    <string name="slide_4_title">Checked Completed Task!</string>
+    <string name="slide_4_desc">Checked Task is Stated as Completed So It Will Not Notify You Afterwards.</string>
+
+    <string name="slide_5_title">Notify Pending Task!</string>
+    <string name="slide_5_desc">Opening The App Notifies All The Remaining Task of All Project.</string>
+
+
 </resources>

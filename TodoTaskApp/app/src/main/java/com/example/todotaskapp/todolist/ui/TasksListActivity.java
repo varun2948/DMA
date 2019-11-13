@@ -1,79 +1,103 @@
-package com.example.todotaskapp;
+package com.example.todotaskapp.todolist.ui;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.todotaskapp.R;
 import com.example.todotaskapp.common.ViewModelFactory;
 import com.example.todotaskapp.common.DateUtils;
-import com.example.todotaskapp.projectlist.ProjectListAdapter;
-import com.example.todotaskapp.todolist.ui.TasksListActivity;
 import com.example.todotaskapp.todolist.TodoViewModel;
+import com.example.todotaskapp.todolist.source.Task;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ProjectListAdapter.OnProjectClickListener {
+public class TasksListActivity extends AppCompatActivity implements TodoListAdapter.OnTaskClickListener {
+
     private TodoViewModel viewModel;
+
+
+    private final LinkedList<Task> mWordList = new LinkedList<>();
+
+    private RecyclerView mRecyclerView;
+
+    private TodoListAdapter mAdapter;
+    private String projectName;
+    private int projectColor;
+    private CardView cardView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tasks_lists);
 
-
-        final ArrayList<String> items = new ArrayList<>();
-        final ProjectListAdapter adapter = new ProjectListAdapter(this, items);
-        adapter.setOnClickListener(this);
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        SnapHelper startSnapHelper = new PagerSnapHelper();
-        startSnapHelper.attachToRecyclerView(recyclerView);
-
-        recyclerView.setAdapter(adapter);
 
         ViewModelFactory factory = ViewModelFactory.getInstance();
         viewModel = ViewModelProviders.of(this, factory).get(TodoViewModel.class);
 
-        viewModel.getAllProjects().observe(this, new Observer<List<String>>() {
-            @Override
-            public void onChanged(@Nullable List<String> projects) {
-                if (projects != null) {
-                    adapter.updateList(projects);
-                }
-            }
-        });
 
+        projectName = getIntent().getStringExtra("extra_project_name");
+        projectColor = getIntent().getIntExtra("extra_project_color", 0);
+
+        bindUI();
+        setupRecyclerView();
+
+        cardView.setCardBackgroundColor(projectColor);
+
+
+        viewModel.getTaskByProjectName(projectName)
+                .observe(this, new Observer<List<Task>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Task> tasks) {
+                        if (tasks != null) {
+                            mAdapter.updateList(tasks);
+                        }
+                    }
+                });
 
         findViewById(R.id.Add_btn)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        showAddTaskDialog(viewModel.getAllProjectsOnce(), null);
+                        showAddTaskDialog(viewModel.getAllProjectsOnce(), projectName);
                     }
                 });
+    }
+
+    private void setupRecyclerView() {
+        // Create an adapter and supply the data to be displayed.
+        mAdapter = new TodoListAdapter(this, mWordList);
+        mAdapter.setOnClickListener(this);
+        // Connect the adapter with the RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+        // Give the RecyclerView a default layout manager.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void bindUI() {
+        cardView = findViewById(R.id.card_view);
+        mRecyclerView = findViewById(R.id.single_task_recyclerview);
+
     }
 
     private void showAddTaskDialog(List<String> projects, String projectName) {
@@ -83,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements ProjectListAdapte
         final TextInputLayout taskName = view.findViewById(R.id.ti_add_task);
         final TextView tvDate = view.findViewById(R.id.tv_date);
 
+//        autoCompleteTextView.setFocusable(false);
+//        autoCompleteTextView.setClickable(false);
+        autoCompleteTextView.setEnabled(false);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, projects);
         autoCompleteTextView.setAdapter(adapter);
@@ -102,10 +129,8 @@ public class MainActivity extends AppCompatActivity implements ProjectListAdapte
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
                         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                MainActivity.this, R.style.anim_dialog, new DatePickerDialog.OnDateSetListener() {
+                                TasksListActivity.this, R.style.anim_dialog, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                                 String date = DateUtils.formatDate(year, monthOfYear, dayOfMonth);
@@ -129,15 +154,10 @@ public class MainActivity extends AppCompatActivity implements ProjectListAdapte
 
                         taskName.getEditText().getText().clear();
                         autoCompleteTextView.getText().clear();
-                        boolean isValidated = viewModel.isTaskValidated(title, projectName);
-                        if (isValidated) {
-                            viewModel.saveTask(title,
-                                    date,
-                                    projectName);
-                        } else {
-                            final Animation animShake = AnimationUtils.loadAnimation(MainActivity.this, R.anim.shake);
-
-                        }
+//                        autoCompleteTextView.setClickable(false);
+                        viewModel.saveTask(title,
+                                date,
+                                projectName);
 
 
                     }
@@ -147,44 +167,9 @@ public class MainActivity extends AppCompatActivity implements ProjectListAdapte
         dialog.show();
     }
 
-
-    private void showDeleteConfirmationDialog(final String projectName) {
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this, R.style.anim_dialog).
-                setTitle("Delete " + projectName)
-                .setMessage(String.format("Delete %s along with all its tasks", projectName))
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        viewModel.deleteByProjectName(projectName);
-                    }
-                })
-                .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-
-        dialog.show();
-    }
-
-
-
     @Override
-    public void onProjectTap(String projectName, int color, View view) {
-
-        Intent intent = new Intent(this, TasksListActivity.class);
-        intent.putExtra("extra_project_name", projectName);
-        intent.putExtra("extra_project_color", color);
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "profile");
-        startActivity(intent, options.toBundle());
-
-
+    public void OnTaskCheckToggled(Task task) {
+        viewModel.update(task);
     }
 
-    @Override
-    public void onProjectLongTap(String projectName) {
-        showDeleteConfirmationDialog(projectName);
-    }
 }
